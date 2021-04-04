@@ -19,7 +19,6 @@ app.renderer.backgroundColor = 0xffffff;
 //Add the canvas that Pixi automatically created for you to the HTML document
 document.body.appendChild(app.view);
 
-
 PIXI.loader
   .add([{
   	name: "boy",
@@ -28,11 +27,25 @@ PIXI.loader
     onComplete: function () {}
   }])
   .load(setup);
-  
+
+let boy
+
 function setup() {
 	  //Create the cat sprite
-	  let boy = new PIXI.Sprite(PIXI.loader.resources["boy"].texture);
-	  
+	  boy = new PIXI.Sprite(PIXI.loader.resources["boy"].texture);
+	  boy.x=100
+	  boy.y=100
 	  //Add the cat to the stage
 	  app.stage.addChild(boy);
+	  
+	  app.ticker.add(delta => gameLoop(delta));
 }
+
+function gameLoop(delta){
+	boy.x +=1
+	boy.x %=512
+}
+
+
+
+
